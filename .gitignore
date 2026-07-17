@@ -1,25 +1,35 @@
-# Build outputs — never commit these
+# Build outputs — exclude everything in bin/ and obj/ EXCEPT the vsixmanifest caches
 bin/
 obj/
+# Allow the manifest caches so MSBuild reads the correct one
+!Base44AIPilot/obj/
+!Base44AIPilot/obj/Debug/
+!Base44AIPilot/obj/Debug/extension.vsixmanifest
+!Base44AIPilot/obj/Release/
+!Base44AIPilot/obj/Release/extension.vsixmanifest
+
+# VS IDE
+.vs/
 *.user
 *.suo
-.vs/
 
-# NuGet restore artifacts
+# NuGet
 packages/
 *.nupkg
 
-# VS temp files
+# MSBuild cache files (keep manifests above)
 *.cache
-*.log
+*.tlog
+*.Up2Date
+*.cto
+*.g.cs
+*.g.i.cs
+*.baml
+*.resources
+*.FileListAbsolute.txt
+
+# Misc
 *.tmp
-thumbs.db
+*.log
+Thumbs.db
 desktop.ini
-
-# Installer build outputs
-installer/VsixBootstrapper/bin/
-installer/VsixBootstrapper/obj/
-
-# Keep the release .vsix only if explicitly added
-# (remove this line if you want to commit the .vsix artifact)
-*.vsix

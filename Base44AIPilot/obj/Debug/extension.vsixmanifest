@@ -1,0 +1,40 @@
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
+                 xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+  <Metadata>
+    <Identity Id="Base44AIPilot.DayakarA.VS2022"
+              Version="1.0.0"
+              Language="en-US"
+              Publisher="DayakarA"/>
+    <DisplayName>Base44 AI Pilot</DisplayName>
+    <Description xml:space="preserve">GitHub Copilot-style AI assistant for .NET MVC solutions powered by Base44.</Description>
+    <MoreInfo>https://app.base44.com/superagent/6a57fda9caabceffcbd70384</MoreInfo>
+  </Metadata>
+  <Installation AllUsers="false">
+    <InstallationTarget Id="Microsoft.VisualStudio.Community"
+                        Version="[17.0,19.0)"
+                        ProductArchitecture="amd64"/>
+    <InstallationTarget Id="Microsoft.VisualStudio.Professional"
+                        Version="[17.0,19.0)"
+                        ProductArchitecture="amd64"/>
+    <InstallationTarget Id="Microsoft.VisualStudio.Enterprise"
+                        Version="[17.0,19.0)"
+                        ProductArchitecture="amd64"/>
+  </Installation>
+  <Dependencies>
+    <Dependency Id="Microsoft.Framework.NDP" DisplayName=".NET Framework" Version="[4.7.2,)"/>
+  </Dependencies>
+  <Prerequisites>
+    <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor"
+                  Version="[17.0,19.0)"
+                  DisplayName="Visual Studio core editor"/>
+  </Prerequisites>
+  <Assets>
+    <Asset Type="Microsoft.VisualStudio.MefComponent"
+           d:Source="Project"
+           d:ProjectName="%CurrentProject%"
+           Path="|Base44AIPilot|"/>
+    <Asset Type="Microsoft.VisualStudio.VsPackage"
+           d:Source="File"
+           Path="Base44AIPilot.pkgdef"/>
+  </Assets>
+</PackageManifest>
