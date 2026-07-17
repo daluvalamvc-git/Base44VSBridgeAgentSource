@@ -1,0 +1,173 @@
+<UserControl x:Class="Base44AIPilot.ToolWindows.Base44ChatWindowControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
+             Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"
+             d:DesignHeight="600" d:DesignWidth="400">
+
+  <UserControl.Resources>
+    <Style x:Key="UserBubble" TargetType="Border">
+      <Setter Property="Background" Value="#0E639C"/>
+      <Setter Property="CornerRadius" Value="8,8,2,8"/>
+      <Setter Property="Padding" Value="10,7"/>
+      <Setter Property="Margin" Value="40,4,8,4"/>
+      <Setter Property="HorizontalAlignment" Value="Right"/>
+      <Setter Property="MaxWidth" Value="320"/>
+    </Style>
+    <Style x:Key="AgentBubble" TargetType="Border">
+      <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+      <Setter Property="CornerRadius" Value="8,8,8,2"/>
+      <Setter Property="Padding" Value="10,7"/>
+      <Setter Property="Margin" Value="8,4,40,4"/>
+      <Setter Property="HorizontalAlignment" Value="Left"/>
+      <Setter Property="MaxWidth" Value="360"/>
+    </Style>
+    <Style x:Key="CodeBlock" TargetType="Border">
+      <Setter Property="Background" Value="#1E1E1E"/>
+      <Setter Property="CornerRadius" Value="4"/>
+      <Setter Property="Padding" Value="10,8"/>
+      <Setter Property="Margin" Value="8,2,8,2"/>
+    </Style>
+    <Style x:Key="SendButton" TargetType="Button">
+      <Setter Property="Background" Value="#0E639C"/>
+      <Setter Property="Foreground" Value="White"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="Padding" Value="14,6"/>
+      <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+  </UserControl.Resources>
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>  <!-- Solution info bar -->
+      <RowDefinition Height="*"/>     <!-- Chat messages -->
+      <RowDefinition Height="Auto"/>  <!-- Apply changes bar -->
+      <RowDefinition Height="Auto"/>  <!-- Input area -->
+    </Grid.RowDefinitions>
+
+    <!-- Solution Info Bar -->
+    <Border Grid.Row="0" Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"
+            Padding="8,5" BorderThickness="0,0,0,1"
+            BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Orientation="Vertical">
+          <TextBlock x:Name="SolutionNameText" Text="No solution open"
+                     FontWeight="SemiBold" FontSize="11"
+                     Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+          <TextBlock x:Name="FileCountText" Text=""
+                     FontSize="10" Opacity="0.7"
+                     Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+        </StackPanel>
+        <Button Grid.Column="1" x:Name="RefreshContextButton" Content="↻ Refresh"
+                Click="RefreshContextButton_Click"
+                FontSize="10" Padding="6,3" Cursor="Hand"
+                Background="Transparent" BorderThickness="1"
+                BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"
+                Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+      </Grid>
+    </Border>
+
+    <!-- Chat Messages ScrollViewer -->
+    <ScrollViewer Grid.Row="1" x:Name="ChatScrollViewer"
+                  VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled"
+                  Padding="0,4">
+      <StackPanel x:Name="ChatPanel" Orientation="Vertical"/>
+    </ScrollViewer>
+
+    <!-- Apply Changes Bar (hidden until AI returns diffs/new files) -->
+    <Border Grid.Row="2" x:Name="ApplyChangesBar" Visibility="Collapsed"
+            Background="#2D4A2D" Padding="8,6"
+            BorderThickness="0,1,0,1"
+            BorderBrush="#3A6A3A">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Column="0">
+          <TextBlock x:Name="ChangeSummaryText" Text="AI suggested changes"
+                     Foreground="#90EE90" FontWeight="SemiBold" FontSize="11"/>
+          <TextBlock x:Name="ChangeDetailsText" Text=""
+                     Foreground="#90EE90" FontSize="10" Opacity="0.8"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Center">
+          <Button x:Name="ReviewChangesButton" Content="Review &amp; Apply"
+                  Click="ReviewChangesButton_Click"
+                  Padding="10,5" Margin="0,0,6,0" Cursor="Hand"
+                  Background="#388E3C" Foreground="White" BorderThickness="0"
+                  FontWeight="SemiBold"/>
+          <Button x:Name="DismissChangesButton" Content="✕"
+                  Click="DismissChangesButton_Click"
+                  Padding="6,5" Cursor="Hand"
+                  Background="Transparent" Foreground="#90EE90" BorderThickness="0"/>
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <!-- Input Area -->
+    <Border Grid.Row="3" BorderThickness="0,1,0,0"
+            BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"
+            Padding="8,6" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Intent selector + active file label -->
+        <Grid Grid.Row="0" Margin="0,0,0,5">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+          </Grid.ColumnDefinitions>
+          <TextBlock Grid.Column="0" Text="Mode:" VerticalAlignment="Center"
+                     FontSize="10" Opacity="0.7" Margin="0,0,5,0"
+                     Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+          <ComboBox Grid.Column="1" x:Name="IntentCombo" FontSize="10" Height="22">
+            <ComboBoxItem Tag="answer_code_qa" IsSelected="True">Ask AI</ComboBoxItem>
+            <ComboBoxItem Tag="analyze_solution">Analyze Solution</ComboBoxItem>
+            <ComboBoxItem Tag="generate_feature">Generate Feature</ComboBoxItem>
+            <ComboBoxItem Tag="refactor_code">Refactor</ComboBoxItem>
+            <ComboBoxItem Tag="explain_flow">Explain Flow</ComboBoxItem>
+            <ComboBoxItem Tag="trace_bug">Trace Bug</ComboBoxItem>
+          </ComboBox>
+          <TextBlock Grid.Column="2" x:Name="ActiveFileLabel" Text="" FontSize="9"
+                     Opacity="0.6" VerticalAlignment="Center" Margin="6,0,0,0"
+                     Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+        </Grid>
+
+        <!-- Prompt input + Send button -->
+        <Grid Grid.Row="1">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+          </Grid.ColumnDefinitions>
+          <TextBox Grid.Column="0" x:Name="PromptBox"
+                   AcceptsReturn="True" TextWrapping="Wrap"
+                   MinHeight="40" MaxHeight="120"
+                   VerticalScrollBarVisibility="Auto"
+                   Padding="8,6" FontSize="12"
+                   KeyDown="PromptBox_KeyDown"
+                   VerticalAlignment="Stretch"
+                   Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                   Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"
+                   BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"/>
+          <Button Grid.Column="1" x:Name="SendButton" Content="Send"
+                  Style="{StaticResource SendButton}"
+                  Click="SendButton_Click"
+                  Margin="6,0,0,0" VerticalAlignment="Bottom"/>
+        </Grid>
+      </Grid>
+    </Border>
+  </Grid>
+</UserControl>

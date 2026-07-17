@@ -1,0 +1,35 @@
+// Base44 AI Pilot — hand-authored pkgdef
+// Replaces auto-generated CreatePkgDef output to avoid reflection-time
+// assembly resolution errors during build.
+//
+// GUIDs:
+//   Package  : {A1B2C3D4-E5F6-7890-ABCD-EF1234567890}
+//   CmdSet   : {B2C3D4E5-F6A7-8901-BCDE-F12345678901}
+
+// ── Package ──────────────────────────────────────────────────────────────────
+[$RootKey$\Packages\{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}]
+@="Base44 AI Pilot"
+"InprocServer32"="$WinDir$\SYSTEM32\mscoree.dll"
+"Class"="Base44AIPilot.Base44AIPilotPackage"
+"CodeBase"="$PackageFolder$\Base44AIPilot.dll"
+"AllowsBackgroundLoad"=dword:00000001
+
+// ── Auto-load when a solution opens ──────────────────────────────────────────
+// UICONTEXT_SolutionOpening = {ADFC4E64-0397-11D1-9F4E-00A0C911004F}
+[$RootKey$\AutoLoadPackages\{ADFC4E64-0397-11D1-9F4E-00A0C911004F}]
+"{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"=dword:00000000
+
+// ── Options page ──────────────────────────────────────────────────────────────
+[$RootKey$\OptionPages\{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}]
+
+// ── Menu resource ─────────────────────────────────────────────────────────────
+[$RootKey$\Menus\{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}]
+@="., 1, 0"
+
+// ── Tool window ───────────────────────────────────────────────────────────────
+[$RootKey$\ToolWindows\{C1D2E3F4-A5B6-7890-1234-567890ABCDEF}]
+@="{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"
+"Name"="Base44 AI Chat"
+"Orientation"=dword:00000002
+"Style"=dword:00000001
+"Window"="DocumentWell"

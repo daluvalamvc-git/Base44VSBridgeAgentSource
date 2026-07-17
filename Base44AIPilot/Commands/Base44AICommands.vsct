@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable"
+              xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <Extern href="stdidcmd.h"/>
+  <Extern href="vsshlids.h"/>
+
+  <Commands package="guidBase44AIPilotPackage">
+    <Menus>
+      <Menu guid="guidBase44AICmdSet" id="TopLevelMenu" priority="0x0700" type="Menu">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_MM_TOOLSADDINS"/>
+        <Strings>
+          <ButtonText>Base44 AI</ButtonText>
+          <CommandName>Base44 AI</CommandName>
+        </Strings>
+      </Menu>
+    </Menus>
+
+    <Groups>
+      <Group guid="guidBase44AICmdSet" id="Base44AIMenuGroup" priority="0x0600">
+        <Parent guid="guidBase44AICmdSet" id="TopLevelMenu"/>
+      </Group>
+    </Groups>
+
+    <Buttons>
+      <!-- No <Icon> elements — avoids VSCT bitmap BMP format requirement.
+           Icons can be added later using a proper 16x16 BMP strip. -->
+
+      <Button guid="guidBase44AICmdSet" id="cmdAskAI" priority="0x0100" type="Button">
+        <Parent guid="guidBase44AICmdSet" id="Base44AIMenuGroup"/>
+        <Strings>
+          <ButtonText>Ask AI...</ButtonText>
+          <ToolTipText>Ask the Base44 AI a question about your solution</ToolTipText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidBase44AICmdSet" id="cmdAnalyzeSolution" priority="0x0200" type="Button">
+        <Parent guid="guidBase44AICmdSet" id="Base44AIMenuGroup"/>
+        <Strings>
+          <ButtonText>Analyze Solution</ButtonText>
+          <ToolTipText>Full solution architecture analysis: patterns, anti-patterns, recommendations</ToolTipText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidBase44AICmdSet" id="cmdGenerateFeature" priority="0x0300" type="Button">
+        <Parent guid="guidBase44AICmdSet" id="Base44AIMenuGroup"/>
+        <Strings>
+          <ButtonText>Generate Feature...</ButtonText>
+          <ToolTipText>Generate a complete feature: Controller + Model + View + Migration</ToolTipText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidBase44AICmdSet" id="cmdRefactor" priority="0x0400" type="Button">
+        <Parent guid="guidBase44AICmdSet" id="Base44AIMenuGroup"/>
+        <Strings>
+          <ButtonText>Refactor...</ButtonText>
+          <ToolTipText>Refactor code across the solution with diff preview</ToolTipText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidBase44AICmdSet" id="cmdExplainFlow" priority="0x0500" type="Button">
+        <Parent guid="guidBase44AICmdSet" id="Base44AIMenuGroup"/>
+        <Strings>
+          <ButtonText>Explain Flow...</ButtonText>
+          <ToolTipText>Trace data flow from Controller through Service, Repository, to View</ToolTipText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidBase44AICmdSet" id="cmdSettings" priority="0x0600" type="Button">
+        <Parent guid="guidBase44AICmdSet" id="Base44AIMenuGroup"/>
+        <Strings>
+          <ButtonText>Settings...</ButtonText>
+          <ToolTipText>Configure Base44 API key and options</ToolTipText>
+        </Strings>
+      </Button>
+    </Buttons>
+
+    <!-- Bitmaps block removed — VSCT requires 16x16 BMP strip format, not PNG.
+         Re-add later with: <Bitmap guid="guidImages" href="Resources\icon.bmp" usedList="bmpPic1"/> -->
+
+  </Commands>
+
+  <Symbols>
+    <GuidSymbol name="guidBase44AIPilotPackage" value="{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"/>
+    <GuidSymbol name="guidBase44AICmdSet" value="{B2C3D4E5-F6A7-8901-BCDE-F12345678901}">
+      <IDSymbol name="TopLevelMenu"       value="0x1021"/>
+      <IDSymbol name="Base44AIMenuGroup"  value="0x1020"/>
+      <IDSymbol name="cmdAskAI"           value="0x0100"/>
+      <IDSymbol name="cmdAnalyzeSolution" value="0x0101"/>
+      <IDSymbol name="cmdGenerateFeature" value="0x0102"/>
+      <IDSymbol name="cmdRefactor"        value="0x0103"/>
+      <IDSymbol name="cmdExplainFlow"     value="0x0104"/>
+      <IDSymbol name="cmdSettings"        value="0x0105"/>
+    </GuidSymbol>
+  </Symbols>
+</CommandTable>

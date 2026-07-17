@@ -1,0 +1,6 @@
+C:\Users\Rithika\source\repos\base44\source\Base44SafeVSBridgeAgent\vsix\installer\VsixBootstrapper\bin\Debug\VsixBootstrapper.exe
+C:\Users\Rithika\source\repos\base44\source\Base44SafeVSBridgeAgent\vsix\installer\VsixBootstrapper\bin\Debug\VsixBootstrapper.pdb
+C:\Users\Rithika\source\repos\base44\source\Base44SafeVSBridgeAgent\vsix\installer\VsixBootstrapper\obj\Debug\VsixBootstrapper.csproj.AssemblyReference.cache
+C:\Users\Rithika\source\repos\base44\source\Base44SafeVSBridgeAgent\vsix\installer\VsixBootstrapper\obj\Debug\VsixBootstrapper.csproj.CoreCompileInputs.cache
+C:\Users\Rithika\source\repos\base44\source\Base44SafeVSBridgeAgent\vsix\installer\VsixBootstrapper\obj\Debug\VsixBootstrapper.exe
+C:\Users\Rithika\source\repos\base44\source\Base44SafeVSBridgeAgent\vsix\installer\VsixBootstrapper\obj\Debug\VsixBootstrapper.pdb

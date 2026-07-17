@@ -1,0 +1,22 @@
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011">
+  <Metadata>
+    <Identity Id="Base44AIPilot" Version="1.0.0.0" Publisher="YourPublisher" Language="en-US" />
+    <DisplayName>Base44 AI Pilot</DisplayName>
+    <Description>Base44 Visual Studio AI helper extension</Description>
+  </Metadata>
+  <Installation>
+    <!-- Option A: safe (includes VS 17.x) -->
+    <InstallationTarget Id="Microsoft.VisualStudio" Version="[14.0,17.0)" ProductArchitecture="any" />
+    <!-- Option B: future-proof (use only if your tooling accepts it) -->
+    <!-- <InstallationTarget Id="Microsoft.VisualStudio" Version="[14.0,*)" ProductArchitecture="any" /> -->
+  </Installation>
+  <Prerequisites>
+    <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[14.0,17.0)" DisplayName="Visual Studio" />
+  </Prerequisites>
+  <Dependencies>
+    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" Version="[4.7.2,)" />
+  </Dependencies>
+  <Assets>
+    <Asset Type="Microsoft.VisualStudio.VsPackage" Path="Base44AIPilot.dll" />
+  </Assets>
+</PackageManifest>
