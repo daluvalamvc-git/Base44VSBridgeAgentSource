@@ -1,0 +1,25 @@
+# Build outputs — never commit these
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+# NuGet restore artifacts
+packages/
+*.nupkg
+
+# VS temp files
+*.cache
+*.log
+*.tmp
+thumbs.db
+desktop.ini
+
+# Installer build outputs
+installer/VsixBootstrapper/bin/
+installer/VsixBootstrapper/obj/
+
+# Keep the release .vsix only if explicitly added
+# (remove this line if you want to commit the .vsix artifact)
+*.vsix
