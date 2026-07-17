@@ -2,26 +2,25 @@
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
                  xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="Base44AIPilot.DayakarA.A1B2C3D4E5F678901"
+    <Identity Id="Base44AIPilot.DayakarA.VS2022"
               Version="1.0.0"
               Language="en-US"
               Publisher="DayakarA"/>
     <DisplayName>Base44 AI Pilot</DisplayName>
-    <Description xml:space="preserve">GitHub Copilot-style AI assistant for .NET MVC solutions powered by Base44. Adds a top-level "Base44 AI" menu with Ask AI, Analyze Solution, Generate Feature, Refactor, and Explain Flow commands.</Description>
+    <Description xml:space="preserve">GitHub Copilot-style AI assistant for .NET MVC solutions powered by Base44.</Description>
     <MoreInfo>https://app.base44.com/superagent/6a57fda9caabceffcbd70384</MoreInfo>
     <License/>
-    <Icon>Resources\icon.png</Icon>
     <PreviewImage/>
   </Metadata>
   <Installation AllUsers="false">
     <InstallationTarget Id="Microsoft.VisualStudio.Community"
-                        Version="[17.0,18.0)"
+                        Version="[17.0,19.0)"
                         ProductArchitecture="amd64"/>
     <InstallationTarget Id="Microsoft.VisualStudio.Professional"
-                        Version="[17.0,18.0)"
+                        Version="[17.0,19.0)"
                         ProductArchitecture="amd64"/>
     <InstallationTarget Id="Microsoft.VisualStudio.Enterprise"
-                        Version="[17.0,18.0)"
+                        Version="[17.0,19.0)"
                         ProductArchitecture="amd64"/>
   </Installation>
   <Dependencies>
@@ -29,7 +28,7 @@
   </Dependencies>
   <Prerequisites>
     <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor"
-                  Version="[17.0,18.0)"
+                  Version="[17.0,19.0)"
                   DisplayName="Visual Studio core editor"/>
   </Prerequisites>
   <Assets>
